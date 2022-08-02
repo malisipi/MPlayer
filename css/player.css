@@ -1,0 +1,86 @@
+
+.player {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: max(var(--player-height), var(--titlebar-height));
+    background: var(--text-color);
+    -webkit-app-region: drag;
+    app-region: drag;
+}
+
+.player__controls {
+    position: relative;
+    left: env(titlebar-area-x, 0);
+    display: flex;
+}
+
+.player .btn{
+    position: relative;
+    aspect-ratio: 1/1;
+    height: calc(max(var(--player-height),var(--titlebar-height)) - 16px);
+    color: var(--quaternary-color);
+    display: inline-block;
+    padding: 8px;
+    -webkit-app-region: none;
+    app-region: none;
+}
+
+.player .btn i {
+    display: inline-grid;
+    font-size: calc(max(var(--player-height),var(--titlebar-height)) - 16px);
+}
+
+.player .btn.play {
+    padding: 4px;
+    height: calc(max(var(--player-height),var(--titlebar-height)) - 8px);
+}
+
+.player .btn.play i {
+    display: inline-grid;
+    font-size: calc(max(var(--player-height),var(--titlebar-height)) - 8px);
+}
+
+.player input{
+    display: inline-grid;
+    accent-color: var(--secondary-color);
+    -webkit-app-region: none;
+    app-region: none;
+    height: max(var(--player-height),var(--titlebar-height));
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.player input.play {
+    width: calc(
+        min(100%,var(--titlebar-width)) 
+        - var(--player-width-without-range)
+    );
+}
+
+.player input.sound {
+    width: 50px;
+}
+
+.player .cover{
+    background-size: cover;
+    aspect-ratio: 1/1;
+    width: max(var(--player-height), var(--titlebar-height));
+    height: max(var(--player-height), var(--titlebar-height));
+    -webkit-app-region: none;
+    app-region: none;
+}
+
+.player .song-name{
+    padding: 0px 5px;
+    display: flex;
+    align-items: center;
+    color: var(--quaternary-color);
+    width: var(--player-song-name-width);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}

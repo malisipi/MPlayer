@@ -1,0 +1,18 @@
+:root{
+    --player-height: 0px;
+    --titlebar-height: env(titlebar-area-height, 36px);
+}
+.player {
+    top:0 !important;
+}
+.player .btn {
+    padding: 4px;
+    height: calc(max(var(--player-height),var(--titlebar-height)) - 8px);
+}
+
+.player .btn i {
+    font-size: calc(max(var(--player-height),var(--titlebar-height)) - 8px);
+}
+.title{
+    transform: translate(-50%, 20%);
+}
