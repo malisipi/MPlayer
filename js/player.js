@@ -1,4 +1,5 @@
 document.onclick=()=>{
+    document.onclick=()=>{};
     window.audioCtx = new AudioContext();
     window.source = window.audioCtx.createMediaElementSource(player);
 
@@ -82,9 +83,9 @@ async function player__previous_song(){
 function player__toggle_shuffle(){
     if(localStorage.shuffle=="true"){
         document.querySelector(".player .shuffle").style.filter="var(--player-button-disabled)";
-        document.querySelector(".player .shuffle").style.filter="var(--player-button-disabled)";
+        document.querySelector(".now_playing .shuffle").style.filter="var(--player-button-disabled)";
     } else {
-        document.querySelector(".now_playing .shuffle").style.filter="";
+        document.querySelector(".player .shuffle").style.filter="";
         document.querySelector(".now_playing .shuffle").style.filter="";
     }
     localStorage.shuffle=!(localStorage.shuffle=="true");
