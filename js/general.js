@@ -116,7 +116,7 @@ function sendNotification(message="",title=document.title){
 
 (async ()=>{
     if(navigator.windowControlsOverlay!=undefined){
-        windowControlsOverlay_css=await fetch("../css/windowControlsOverlay.css");
+        windowControlsOverlay_css=await fetch("./css/windowControlsOverlay.css");
         windowControlsOverlay_css=await windowControlsOverlay_css.text();
         navigator.windowControlsOverlay.ongeometrychange=()=>{
             if(navigator.windowControlsOverlay.visible){

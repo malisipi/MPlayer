@@ -1,11 +1,18 @@
-var audioCtx = new AudioContext();
-var source = audioCtx.createMediaElementSource(player);
+document.onclick=()=>{
+    window.audioCtx = new AudioContext();
+    window.source = window.audioCtx.createMediaElementSource(player);
 
-var gainNode = audioCtx.createGain();
-gainNode.gain.value = 1;
-source.connect(gainNode);
+    window.gainNode = window.audioCtx.createGain();
+    window.gainNode.gain.value = 1;
+    window.source.connect(window.gainNode);
 
-gainNode.connect(audioCtx.destination);
+    window.gainNode.connect(window.audioCtx.destination);
+
+    if(localStorage.volume!=undefined){
+        __player.sound.value=Number(localStorage.volume);
+        gainNode.gain.value=localStorage.volume/100;
+    }
+}
 
 function player__play_pause(){
     if(!player.paused){ //is playing
@@ -120,8 +127,4 @@ if(localStorage.repeat=="true") {
     document.querySelector(".player .bi.repeat1").style.display="";
     document.querySelector(".now_playing .bi.repeat").style.display="none";
     document.querySelector(".now_playing .bi.repeat1").style.display="";
-}
-if(localStorage.volume!=undefined){
-    __player.sound.value=Number(localStorage.volume);
-    gainNode.gain.value=localStorage.volume/100;
 }
