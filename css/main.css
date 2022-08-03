@@ -25,8 +25,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: #2C3333;
-        --secondary-color: #395B64;
+        --primary-color: #181B1B;
+        --secondary-color: #004457;
         --text-color: #787b9a;
     }
     .library .item {

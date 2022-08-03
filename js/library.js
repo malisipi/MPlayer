@@ -179,6 +179,9 @@ async function loadSong(id,customList=false){
     } else {
         nowPlayingList=musicList;
     }
+    if(player.src!=""){
+        URL.revokeObjectURL(player.src)
+    }
     nowPlaying=[id,customList];
     __player.song_name.innerText=nowPlayingList[id].name;
     changeAlbumCover("");

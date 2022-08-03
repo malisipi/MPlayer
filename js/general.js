@@ -1,15 +1,17 @@
-idb_get=()=>{}
-idb_set=()=>{}
-
 (async()=>{
     const { get, set } = await import("https://cdnjs.cloudflare.com/ajax/libs/idb-keyval/6.2.0/index.min.js");
-    idb_get=get;
-    idb_set=set;
+    window.idb_get=get;
+    window.idb_set=set;
 
-    window.musicFolder=await idb_get("musics_folder");
-    if(musicFolder!=undefined){
-        document.querySelector(".welcome__latest_folder").style.display=""
-        document.querySelector(".welcome__latest_folder .name").innerText=musicFolder.name
+    if(window.showDirectoryPicker==undefined){
+        const { showDirectoryPicker  } = await import("https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js"); 
+        window.showDirectoryPicker=showDirectoryPicker;
+    } else {
+        window.musicFolder=await idb_get("musics_folder");
+        if(musicFolder!=undefined){
+            document.querySelector(".welcome__latest_folder").style.display=""
+            document.querySelector(".welcome__latest_folder .name").innerText=musicFolder.name
+        }
     }
 })();
 
