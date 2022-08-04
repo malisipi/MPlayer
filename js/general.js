@@ -157,6 +157,7 @@ function settings__apply(){
     } else {
         if(__player.sound.value>100){
             gainNode.gain.value = 1;
+            localStorage.volume = 100;
         }
         __player.sound.max=100;
     }
