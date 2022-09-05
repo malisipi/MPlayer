@@ -7,7 +7,7 @@
     --main-one-col-width: 300px;
     --player-height: 50px;
     --titlebar-height: 0px;
-    --titlebar-width: env(titlebar-area-width, 100%);;
+    --titlebar-width: env(titlebar-area-width, 100%);
     --transition-duration: 300ms;
     --aside-width: 300px;
     --player-button-disabled: brightness(0.6);
@@ -369,4 +369,24 @@ dialog .controls button {
     display:flex;
     gap:15px;
         font-size: calc(calc(var(--main-one-col-width) - 70px) / 5);
+}
+
+.vebview_window_controls{
+    display: none;
+    width: calc(calc(var(--titlebar-height) * 4) + 20px);
+    text-align: right;
+}
+
+.vebview_window_controls .btn:hover{
+    background: #0003;
+}
+
+.vebview_resize {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    z-index: 9999;
 }

@@ -19,8 +19,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/musicmetadata/2.0.2/musicmetadata.js"></script>
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#484b6a">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#787b9a">
+    <link rel="stylesheet" href="vebview.js/vebview.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/player.css">
+    <script>
+        _vebview_loaded=async ()=>{
+            if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
+                await vebview.http.download(location.href.match(/^.*\//g)[0]+"favicon.ico","_.ico");
+            } else {
+                await vebview.http.download(location.href.match(/^.*\//g)[0]+"favicon.png","_.png");
+            }
+            vebview.window.set_icon("_");
+        }
+    </script>
+    <script src="vebview.js/vebview.js"></script>
     <script src="js/general.js" defer></script>
     <script src="js/player.js" defer></script>
     <script src="js/library.js" defer></script>
@@ -126,9 +138,9 @@
         </section>
     </main>
     <section class="player">
-        <div class="player__controls">
+        <div class="player__controls" app-region="drag">
             <div class="song cover" onclick="show_playing_song();"></div>
-            <div class="song-name" onclick="show_playing_song();">No Song Playing</div>
+            <div class="song-name" onclick="if(window.vebview!=null){return false};show_playing_song();" app-region="drag">No Song Playing</div>
             <div class="btn shuffle" onclick="player__toggle_shuffle();" style="filter: var(--player-button-disabled);">
                 <i class="bi bi-shuffle shuffle"></i>
             </div>
@@ -153,7 +165,13 @@
                 <i class="bi bi-volume-mute sound0" style="display: none;"></i>
             </div>
             <input class="sound" type="range" min="0" step="1" max="100" value="100"/>
+            <div class="vebview_window_controls" app-region="drag">
+                <div class="btn"><i class="bi bi-dash" onclick="vebview.window.minimize();"></i></div>
+                <div class="btn"><i class="bi bi-plus" onclick="vebview.window.toggle_maximize();"></i></div>
+                <div class="btn"><i class="bi bi-x" onclick="vebview.window.close();"></i></div>
+            </div>
         </div>
     </section>
+    <div class="vebview_resize" app-region="nw-resize"></div>
 </body>
 </html>

@@ -31,4 +31,5 @@ A music player that works on your browser. You can [try it](https://malisipi.git
 * [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans) - OFL License
 * [IDB Keyval](https://github.com/jakearchibald/idb-keyval)
 * [Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter) - MIT License
-    > To support old browsers that doesn't have window.showDirectoryPicker  function
+    > To support old browsers that doesn't have window.showDirectoryPicker function
+* [Vebview.JS](https://github.com/malisipi/Vebview.JS) - Apache 2.0 License

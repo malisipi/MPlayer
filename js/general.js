@@ -117,20 +117,26 @@ function sendNotification(message="",title=document.title){
 }
 
 (async ()=>{
-    if(navigator.windowControlsOverlay!=undefined){
-        windowControlsOverlay_css=await fetch("./css/windowControlsOverlay.css");
-        windowControlsOverlay_css=await windowControlsOverlay_css.text();
-        navigator.windowControlsOverlay.ongeometrychange=()=>{
-            if(navigator.windowControlsOverlay.visible){
-                if(!document.querySelector("style.windowControlsOverlay")){
-                    document.head.insertAdjacentHTML("beforeend","<style class=\"windowControlsOverlay\">"+windowControlsOverlay_css+"</style>")
-                }
-            } else {
-                if(document.querySelector("style.windowControlsOverlay")){
-                    document.querySelector("style.windowControlsOverlay").remove()
+    if(window["c2VydmVyX3ZlcnNpb24="]==null){
+        if(navigator.windowControlsOverlay!=undefined){
+            windowControlsOverlay_css=await fetch("./css/windowControlsOverlay.css");
+            windowControlsOverlay_css=await windowControlsOverlay_css.text();
+            navigator.windowControlsOverlay.ongeometrychange=()=>{
+                if(navigator.windowControlsOverlay.visible){
+                    if(!document.querySelector("style.windowControlsOverlay")){
+                        document.head.insertAdjacentHTML("beforeend","<style class=\"windowControlsOverlay\">"+windowControlsOverlay_css+"</style>")
+                    }
+                } else {
+                    if(document.querySelector("style.windowControlsOverlay")){
+                        document.querySelector("style.windowControlsOverlay").remove()
+                    }
                 }
             }
         }
+    } else {
+        windowControlsOverlay_css=await fetch("./css/windowControlsOverlay.css");
+        windowControlsOverlay_css=await windowControlsOverlay_css.text();
+        document.head.insertAdjacentHTML("beforeend","<style>.vebview_resize{display:block;}:root{--titlebar-width:calc(100% - calc(var(--titlebar-height) * 4));}.vebview_window_controls{display:block;}"+windowControlsOverlay_css+"</style>");
     }
 })();
 
