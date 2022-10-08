@@ -114,6 +114,13 @@ player.onloadedmetadata=()=>{
 
 setInterval(()=>{
     __player.range.value=Math.round(player.currentTime);
+    if(vebview!=undefined){
+        if(player.src==""){
+            vebview.window.clear_progress();
+        } else {
+            vebview.window.set_progress(Math.round(player.currentTime*100/player.duration));
+        }
+    }
 },500)
 
 player.onpause=player__pause; //if paused by media keys
@@ -143,6 +150,8 @@ document.onkeydown=(e)=>{
     }
 }
 
+if(vebview!=undefined){
 vebview.hotkeys.register({key:"K",_ctrl:1,handler:player__play_pause});
 vebview.hotkeys.register({key:"J",_ctrl:1,handler:player__previous_song});
 vebview.hotkeys.register({key:"L",_ctrl:1,handler:player__next_song});
+}
