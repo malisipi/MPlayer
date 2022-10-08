@@ -129,3 +129,20 @@ if(localStorage.repeat=="true") {
     document.querySelector(".now_playing .bi.repeat").style.display="none";
     document.querySelector(".now_playing .bi.repeat1").style.display="";
 }
+
+document.onkeydown=(e)=>{
+    switch(e.code) {
+        case "KeyJ":
+            player__previous_song();
+            break;
+        case "KeyK":
+            player__play_pause();
+            break;
+        case "KeyL":
+            player__next_song();
+    }
+}
+
+vebview.hotkeys.register({key:"K",_ctrl:1,handler:player__play_pause});
+vebview.hotkeys.register({key:"J",_ctrl:1,handler:player__previous_song});
+vebview.hotkeys.register({key:"L",_ctrl:1,handler:player__next_song});

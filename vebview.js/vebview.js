@@ -67,6 +67,9 @@ const vebview={
             if(file=="") return false;
             return await window["d3JpdGVfZmlsZQ=="](file, data);
         },
+        write_file_binary:async (file="",data="")=>{
+            console.warn("Not implemented yet.")
+        },
         append_file:async (file="",data="")=>{
             if(file=="") return false;
             return await window["YXBwZW5kX2ZpbGU="](file, data);
@@ -159,10 +162,10 @@ const vebview={
         is_maximized:async ()=>{
             return await window["d2luZG93X2lzX21heGltaXplZA=="]();
         },
-        move:async (x, y)=>{
+        move:async (x=0, y=0)=>{
             await window["d2luZG93X21vdmU="](String(x),String(y));
         },
-        move_by:async (x, y)=>{
+        move_by:async (x=0, y=0)=>{
             await window["d2luZG93X21vdmVfYnk="](String(x),String(y));
         },
         is_fullscreen:async ()=>{
@@ -206,6 +209,9 @@ const vebview={
                 if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
                     await window["d2luZG93X3NldF9pY29u"](file+exts[0]);
                 } else {
+                    if(file+exts[1]!="_.progress_png"){
+                        vebview._._old_icon=file+exts[1];
+                    }
                     await window["d2luZG93X3NldF9pY29u"](file+exts[1]);
                 }
             }
@@ -224,6 +230,28 @@ const vebview={
         },
         get_title:async ()=>{
             return await window["d2luZG93X2dldF90aXRsZQ=="]();
+        },
+        set_progress:async (percent=0)=>{
+            if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
+                return await window["d2luZG93X3NldF9wcm9ncmVzcw=="](String(percent))
+            } else {
+                let data_png=await vebview._._svg_to_png("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' fill='currentColor' viewBox='0 0 256 256'%3E%3Crect width='"+Math.round(256/100*percent)+"' height='256' fill='green'/%3E%3C/svg%3E");
+                await window["d3JpdGVfZmlsZV9iaW5hcnk="]("_.progress_png",data_png);
+                await vebview.window.set_icon("_.progress_png",["",""]);
+                return true;
+            }
+        },
+        clear_progress:async ()=>{
+            if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
+                return await window["d2luZG93X2NsZWFyX3Byb2dyZXNz"]()
+            } else {
+                if(vebview._._old_icon!=null) {
+                    await vebview.window.set_icon(vebview._._old_icon,["",""]);
+                } else {
+                    await vebview.window.set_progress(0);
+                }
+                return true;
+            }
         }
     },
     http:{
@@ -258,6 +286,45 @@ const vebview={
             }
         }
     },
+    clipboard:{
+        set:async (text)=>{
+            if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
+                return await window["Y2xpcGJvYXJkX3NldA=="](text);
+            } else {
+                let copy_selector=document.createElement("input");
+                copy_selector.id="vebview_copy_selector";
+                copy_selector.style.position="fixed";
+                copy_selector.style.left="-50000px";
+                copy_selector.style.top="-50000px";
+                copy_selector.value=text;
+                document.body.insertAdjacentElement("beforeend",copy_selector);
+                let copy_selector_in_doc=document.querySelector("input#vebview_copy_selector");
+                copy_selector_in_doc.setSelectionRange(0,99999);
+                let _result=document.execCommand("copy");
+                copy_selector_in_doc.remove();
+                return _result;
+            }
+        },
+        get:async ()=>{
+            if(await vebview.os.get_version()==vebview.os.os_versions.WINDOWS){
+                return await window["Y2xpcGJvYXJkX2dldA=="]();
+            } else {
+                let copy_selector=document.createElement("input");
+                copy_selector.id="vebview_copy_selector";
+                copy_selector.style.position="fixed";
+                copy_selector.style.left="-50000px";
+                copy_selector.style.top="-50000px";
+                copy_selector.value="";
+                document.body.insertAdjacentElement("beforeend",copy_selector);
+                let copy_selector_in_doc=document.querySelector("input#vebview_copy_selector");
+                copy_selector_in_doc.setSelectionRange(0,99999);
+                document.execCommand("paste");
+                _the_text=copy_selector_in_doc.value;
+                copy_selector_in_doc.remove();
+                return _the_text;
+            }
+        }
+    },
     assign:{
         title:async (obj)=>{
             vebview._._assign._title=obj;
@@ -267,6 +334,55 @@ const vebview={
     unassign:{
         title:(obj)=>{vebview._._assign._title=null;}
     },
+    hotkeys:{
+        register:({key,handler=()=>{console.log("Shortcut Works!");},_alt=0,_shift=0,_super=0,_ctrl=0})=>{
+            key=String(_ctrl)+String(_shift)+String(_alt)+String(_super)+String(key.toUpperCase()[0]?.charCodeAt(0)).padStart(3, "0");
+            if(key){
+                window["cmVnaXN0ZXJfaG90a2V5"](key);
+                vebview._._hotkeys._functions[key]=handler;
+            }
+        },
+        registerHEX:({key,handler=()=>{console.log("Shortcut Works!");},_alt=0,_shift=0,_super=0,_ctrl=0})=>{
+            key=String(_ctrl)+String(_shift)+String(_alt)+String(_super)+String(parseInt(key,16)).padStart(3, "0");
+            if(key){
+                window["cmVnaXN0ZXJfaG90a2V5"](key);
+                vebview._._hotkeys._functions[key]=handler;
+            }
+        },
+        unregister:({key,_alt=0,_shift=0,_super=0,_ctrl=0})=>{
+            key=String(_ctrl)+String(_shift)+String(_alt)+String(_super)+String(key.toUpperCase()[0]?.charCodeAt(0)).padStart(3, "0");
+            if(key){
+                window["dW5yZWdpc3Rlcl9ob3RrZXk="](key);
+                vebview._._hotkeys._functions[key]=undefined;
+            }
+        },
+        unregisterHEX:({key,_alt=0,_shift=0,_super=0,_ctrl=0})=>{
+            key=String(_ctrl)+String(_shift)+String(_alt)+String(_super)+String(parseInt(key,16)).padStart(3, "0");
+            if(key){
+                window["dW5yZWdpc3Rlcl9ob3RrZXk="](key);
+                vebview._._hotkeys._functions[key]=undefined;
+            }
+        }
+    },
+    args:async ()=>{
+        return await window["YXBwX2FyZ3M="]();
+    },
+    messenger:{
+        new:(channel)=>{
+            vebview._._messenger._channels[channel]=new BroadcastChannel("vebview_"+channel);
+        },
+        add_event_listener:(channel,listener=()=>{})=>{
+            vebview._._messenger._channels[channel].onmessage=(e,the_listener=listener)=>{
+                the_listener(e.data);
+            };
+        },
+        post:(channel,args)=>{
+            vebview._._messenger._channels[channel].postMessage(args);
+        },
+        close:(channel)=>{
+            vebview._._messenger._channels[channel]=undefined;
+        }
+    },
     _:{
         _app_region:{
             _click:false,
@@ -275,6 +391,30 @@ const vebview={
         },
         _assign:{
             _title:null
+        },
+        _old_icon:null,
+        _svg_to_png:async (data_svg)=>{
+            let canvas=document.createElement("canvas");
+            let content=canvas.getContext("2d");
+            canvas.width=256;
+            canvas.height=256;
+            return await new Promise((resolve, reject) => {
+                let img = document.createElement("img");
+                img.onload = () => {
+                    content.drawImage(img,0,0,256,256);
+                    resolve(canvas.toDataURL('image/png').replace("data:image/png;base64,",""))
+                }
+                img.src = data_svg;
+            })
+        },
+        _hotkeys:{
+            _functions:{},
+            _event_handler:(event_code)=>{
+                vebview._._hotkeys._functions[event_code.padStart(7, "0")]();
+            }
+        },
+        _messenger:{
+            _channels:{}
         }
     }
 }
