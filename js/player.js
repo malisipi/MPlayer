@@ -114,7 +114,7 @@ player.onloadedmetadata=()=>{
 
 setInterval(()=>{
     __player.range.value=Math.round(player.currentTime);
-    if(vebview!=undefined){
+    if(window["vebview"]!=undefined){
         if(player.src==""){
             vebview.window.clear_progress();
         } else {
@@ -150,7 +150,7 @@ document.onkeydown=(e)=>{
     }
 }
 
-if(vebview!=undefined){
+if(window["vebview"]!=undefined){
 vebview.hotkeys.register({key:"K",_ctrl:1,handler:player__play_pause});
 vebview.hotkeys.register({key:"J",_ctrl:1,handler:player__previous_song});
 vebview.hotkeys.register({key:"L",_ctrl:1,handler:player__next_song});
