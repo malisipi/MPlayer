@@ -138,6 +138,7 @@ if(localStorage.repeat=="true") {
 }
 
 document.onkeydown=(e)=>{
+    if(document.activeElement==aside__search) return;
     switch(e.code) {
         case "KeyJ":
             player__previous_song();
