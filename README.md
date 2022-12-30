@@ -8,15 +8,16 @@ A music player that works on your browser. You can [try it](https://malisipi.git
 
 ## APIs Used by MPlayer
 
-|API|Chrome|Edge|Firefox|Internet Explorer|Opera|Safari|
-|-|-|-|-|-|-|-|
-| [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API)* | 20 | 14 | 22 | x | 23 | 7 |
-| [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)* | 24 | 12 | 16 | 10 | 15 | 8
-| [AudioContext API](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) | 35 | 12 | 25 | x | 22 | 14.1 |
-| [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) | 42 | 14 | 39 | x | 29 | 10.1 |
-| [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API) | 86 | 86 | x | x | 72 | 15.2 |
-| \\\-\-[Window.showDirectoryPicker()](https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker) | 86 | 86 | x | x | 72 | x |
-| [Window Controls Overlay API](https://developer.mozilla.org/en-US/docs/Web/API/Window_Controls_Overlay_API)* | 105 | 105 | x | x | 91 | x |
+|API|Chrome|Edge|Firefox|Opera|Safari|
+|-|-|-|-|-|-|
+| [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API)* | 20 | 14 | 22 | 23 | 7 |
+| [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)* | 24 | 12 | 16 | 15 | 8 |
+| [AudioContext API](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) | 35 | 12 | 25 | 22 | 14.1 |
+| [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) | 42 | 14 | 39 | 29 | 10.1 |
+| [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API) | 86 | 86 | x | 72 | 15.2 |
+| \\\-\-[Window.showDirectoryPicker()](https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker) | 86 | 86 | x | 72 | x |
+| [Window Controls Overlay API](https://developer.mozilla.org/en-US/docs/Web/API/Window_Controls_Overlay_API)* | 105 | 105 | x | 91 | x |
+| [Media Session API](https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API)* | 73 | 79 | 82 | 60 | 15 |
 
 > \*: Optional (For Extended Functionality)
 
