@@ -16,7 +16,7 @@ A music player that works on your browser. You can [try it](https://malisipi.git
 | [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) | 42 | 14 | 39 | x | 29 | 10.1 |
 | [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API) | 86 | 86 | x | x | 72 | 15.2 |
 | \\\-\-[Window.showDirectoryPicker()](https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker) | 86 | 86 | x | x | 72 | x |
-| [Window Controls Overlay API](https://developer.mozilla.org/en-US/docs/Web/API/Window_Controls_Overlay_API)* | 98 | 98 | x | x | 84 | x |
+| [Window Controls Overlay API](https://developer.mozilla.org/en-US/docs/Web/API/Window_Controls_Overlay_API)* | 105 | 105 | x | x | 91 | x |
 
 > \*: Optional (For Extended Functionality)
 
