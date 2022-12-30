@@ -185,6 +185,14 @@ async function loadSong(id,customList=false){
     nowPlaying=[id,customList];
     __player.song_name.innerText=nowPlayingList[id].name;
     changeAlbumCover("");
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+        title: nowPlayingList[id].name,
+        artist: nowPlayingList[id].artist,
+        album: nowPlayingList[id].album,
+        artwork: []
+        });
+    }
     sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name);
     updateNowPlayingUI(nowPlayingList[id]);
     blobObject=await getBlobFromLocation(nowPlayingList[id].path);
