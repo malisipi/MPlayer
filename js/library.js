@@ -192,6 +192,8 @@ async function loadSong(id,customList=false){
         album: nowPlayingList[id].album,
         artwork: []
         });
+        navigator.mediaSession.setActionHandler("previoustrack", player__previous_song);
+        navigator.mediaSession.setActionHandler("nexttrack", player__next_song);
     }
     sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name);
     updateNowPlayingUI(nowPlayingList[id]);
