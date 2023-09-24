@@ -106,11 +106,11 @@ document.querySelector(".player .btn.sound").onclick=()=>{
 
 function sendNotification(message="",title=document.title){
     if (Notification.permission === "granted") {
-        new Notification(title, {body:message});
+        new Notification(title, {body:message, icon:"./favicon.png"});
     } else if (Notification.permission !== 'denied' || Notification.permission === "default") {
         Notification.requestPermission(function (permission) {
             if (permission === "granted") {
-                new Notification(title, {body:message});
+                new Notification(title, {body:message, icon:"./favicon.png"});
             }
         });
     }
