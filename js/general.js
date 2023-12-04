@@ -54,7 +54,7 @@ __player.range.oninput=(e)=>{
 __player.range.onmousemove=(e)=>{
     __player.title.style.top=e.clientY+"px";
     __player.title.style.left=e.clientX+"px";
-    __player.title.innerText=Math.floor(player.currentTime/60)+":"+Math.round(player.currentTime%60)
+    __player.title.innerText=Math.floor(player.currentTime/60)+":"+String(Math.round(player.currentTime%60)).padStart(2,"0");
 }
 
 __player.range.onmouseleave=(e)=>{
