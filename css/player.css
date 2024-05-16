@@ -55,7 +55,7 @@
 
 .player input.play {
     width: calc(
-        min(100%,var(--titlebar-width)) 
+        min(100%,var(--titlebar-width))
         - var(--player-width-without-range)
     );
 }
@@ -71,6 +71,7 @@
     height: max(var(--player-height), var(--titlebar-height));
     -webkit-app-region: none;
     app-region: none;
+    background-position: center;
 }
 
 .player .song-name{

@@ -4,7 +4,7 @@
     window.idb_set=set;
 
     if(window.showDirectoryPicker==undefined){
-        const { showDirectoryPicker  } = await import("https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js"); 
+        const { showDirectoryPicker  } = await import("https://cdn.jsdelivr.net/npm/native-file-system-adapter/mod.js");
         window.showDirectoryPicker=showDirectoryPicker;
     } else {
         window.musicFolder=await idb_get("musics_folder");
@@ -104,13 +104,13 @@ document.querySelector(".player .btn.sound").onclick=()=>{
     }
 }
 
-function sendNotification(message="",title=document.title){
+function sendNotification(message="",title=document.title,icon="./favicon.png"){
     if (Notification.permission === "granted") {
-        new Notification(title, {body:message, icon:"./favicon.png"});
+        new Notification(title, {body:message, icon:icon});
     } else if (Notification.permission !== 'denied' || Notification.permission === "default") {
         Notification.requestPermission(function (permission) {
             if (permission === "granted") {
-                new Notification(title, {body:message, icon:"./favicon.png"});
+                new Notification(title, {body:message, icon:icon});
             }
         });
     }

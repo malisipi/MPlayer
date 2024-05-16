@@ -52,13 +52,13 @@ a {
 ::-webkit-scrollbar-track {
     background: var(--quaternary-color);
 }
-   
+
 ::-webkit-scrollbar-thumb {
-    background: var(--tertiary-color); 
+    background: var(--tertiary-color);
 }
-  
+
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-color); 
+    background: var(--text-color);
 }
 
 aside {
@@ -363,6 +363,7 @@ dialog .controls button {
     width: var(--main-one-col-width);
     height: var(--main-one-col-width);
     border-radius: 10px;
+    background-position: center;
 }
 
 .now_playing .song-controls{

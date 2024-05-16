@@ -154,7 +154,7 @@ function renderList(type="song",customList=musicList){
     library__search_update();
 }
 
-async function changeAlbumCover(cover){
+function changeAlbumCover(cover){
     if(cover==""){
         document.querySelector(".player .song.cover").style.backgroundImage="";
         document.querySelector(".now_playing .song.cover").style.backgroundImage="";
@@ -162,7 +162,9 @@ async function changeAlbumCover(cover){
         cover_url=URL.createObjectURL(new Blob([cover.data], { type: 'application/octet-stream' }));
         document.querySelector(".player .song.cover").style.backgroundImage="url("+cover_url+")";
         document.querySelector(".now_playing .song.cover").style.backgroundImage="url("+cover_url+")";
+        return cover_url;
     }
+    return false;
 }
 
 function updateNowPlayingUI(now_playing_song){
@@ -190,20 +192,34 @@ async function loadSong(id,customList=false){
         title: nowPlayingList[id].name,
         artist: nowPlayingList[id].artist,
         album: nowPlayingList[id].album,
-        artwork: []
+        artwork: [{src:"../assets/music.png"}]
         });
         navigator.mediaSession.setActionHandler("previoustrack", player__previous_song);
         navigator.mediaSession.setActionHandler("nexttrack", player__next_song);
     }
-    sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name);
     updateNowPlayingUI(nowPlayingList[id]);
     blobObject=await getBlobFromLocation(nowPlayingList[id].path);
     player.src=URL.createObjectURL(blobObject);
     console.log(await musicmetadata(blobObject, "audio", function (err, metadata) {
-        if (err) throw err;
+        if (err){
+            sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name);
+            throw err;
+        }
         if(metadata.picture[0]!=undefined){
-            changeAlbumCover(metadata.picture[0])
+            let cover_url = changeAlbumCover(metadata.picture[0]);
+            sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name, cover_url);
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                title: nowPlayingList[id].name,
+                artist: nowPlayingList[id].artist,
+                album: nowPlayingList[id].album,
+                artwork: [{src:cover_url}]
+                });
+                navigator.mediaSession.setActionHandler("previoustrack", player__previous_song);
+                navigator.mediaSession.setActionHandler("nexttrack", player__next_song);
+            }
         } else {
+            sendNotification(nowPlayingList[id].artist+" singing from "+nowPlayingList[id].album+" album", nowPlayingList[id].name);
             console.warn("No Cover For This Song")
         }
     }))
