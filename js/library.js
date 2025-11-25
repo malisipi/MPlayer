@@ -73,7 +73,7 @@ async function createList(folder=musicFolder,path="/"){
     for await (const entry of folder.values()) {
         if(entry.kind=="file"){
             let ext=entry.name.split(".").at(-1)
-            if(ext=="mp3"||ext=="wav"||ext=="m4a"||ext=="flac"||ext=="ogg"){
+            if(ext=="mp3"||ext=="wav"||ext=="m4a"||ext=="flac"||ext=="ogg"||ext=="opus"){
                 musicList.push({
                     path:path+entry.name,
                     artist:extractArtist(path,entry.name),
